@@ -21,3 +21,4 @@ override.tf.json
 
 .terraform/plugins/
 
+terraform.tfvars

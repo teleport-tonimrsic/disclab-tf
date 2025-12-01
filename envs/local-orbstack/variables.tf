@@ -20,3 +20,4 @@ variable "teleport_kube_cluster_name" {
   type        = string
   default     = "orbstack-kube"
 }
+

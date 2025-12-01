@@ -39,7 +39,7 @@ resource "helm_release" "teleport_kube_agent" {
 
     {
       name  = "roles"
-      value = "kube\\,discovery"
+      value = "kube\\,app\\,discovery"
     },
 
     {
@@ -56,5 +56,32 @@ resource "helm_release" "teleport_kube_agent" {
       name  = "labels.provider"
       value = "local"
     },
+    {
+      name  = "kubernetesDiscovery[0].types[0]"
+      value = "app"
+    },
+    {
+      name  = "kubernetesDiscovery[0].namespaces[0]"
+      value = "disclab"
+    },
+    {
+      name  = "kubernetesDiscovery[0].labels.env"
+      value = "lab"
+    },
+    {
+      name = "appResources[0].labels.teleport\\.dev/kubernetes-cluster"
+      value = var.teleport_kube_cluster_name
+    },
   ]
+}
+
+module "ghost_app" {
+  source = "../../modules/ghost-app"
+  namespace = kubernetes_namespace.demo.metadata[0].name
+
+  labels = {
+    app = "ghost"
+    env = "lab"
+  }
+
 }

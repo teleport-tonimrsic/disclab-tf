@@ -1,0 +1,11 @@
+kind: token
+version: v2
+metadata:
+  name: disclab-iam-token
+spec:
+  roles: [Node]
+  join_method: iam
+  allow:
+    - aws_account: '165258854585'
+      aws_arn: 'aws:iam::165258854585:role/disclab-linux-role'
+
